@@ -1,0 +1,74 @@
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#f4f4f4;
+  color:#222;
+}
+
+nav{
+  background:#050404;
+  color:rgb(242, 239, 239);
+  display:flex;
+  justify-content:space-between;
+  padding:20px 10%;
+}
+
+nav ul{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+}
+
+.hero{
+  text-align:center;
+  padding:100px 20px;
+  background:white;
+}
+
+.hero h2{
+  font-size:50px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  margin-bottom:20px;
+}
+
+button{
+  padding:12px 24px;
+  border:none;
+  cursor:pointer;
+}
+
+.projects{
+  width:80%;
+  margin:auto;
+  padding:40px 0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+}
+.hidden {
+  display: none;
+}
+
+.cs50-list {
+  margin-top: 10px;
+}
