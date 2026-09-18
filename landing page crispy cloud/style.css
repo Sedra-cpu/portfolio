@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7ff;
+  text-align: center;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #4f46e5, #9333ea);
+  color: white;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 42px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background: white;
+  color: #4f46e5;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* PRODUCTS */
+.products {
+  padding: 50px 20px;
+}
+
+.products h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.card {
+  background: white;
+  margin: 15px auto;
+  padding: 15px;
+  width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card h3 {
+  margin: 10px 0 5px;
+}
+
+.card p {
+  color: green;
+  font-weight: bold;
+}
+
+/* WHY */
+.why {
+  padding: 50px 20px;
+  background: #eef2ff;
+}
+.hero {
+  background-image: url("https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=1400");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 120px 20px;
+  position: relative;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+}
+
+.hero * {
+  position: relative;
+  z-index: 1;
+}
+.cart {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #000, #333);
+  color: white;
+  padding: 33px 25px;
+  font-size: 88px;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
