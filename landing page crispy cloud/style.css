@@ -1,19 +1,141 @@
-body {
+/* RESET & BASE STYLES */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7ff;
-  text-align: center;
+  padding: 0;
 }
 
-/* HERO */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #faf7f2;
+  color: #2c2c2c;
+  line-height: 1.6;
+}
+
+/* HERO SECTION */
 .hero {
-  background: linear-gradient(135deg, #4f46e5, #9333ea);
-  color: white;
-  padding: 100px 20px;
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border-bottom: 1px solid #fed7aa;
 }
 
 .hero h1 {
-  font-size: 42px;
+  font-size: 2.8rem;
+  color: #ea580c;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #78350f;
+}
+
+/* CART HEADER BAR */
+.cart-bar {
+  text-align: right;
+  padding: 15px 30px;
+  background-color: #ffffff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* PRODUCTS SECTION */
+.products {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.products h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #1f2937;
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* CARD STYLES */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #111827;
+  text-transform: capitalize;
+}
+
+.card p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ea580c;
+  margin-bottom: 15px;
+}
+
+.card button {
+  background-color: #ea580c;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card button:hover {
+  background-color: #c2410c;
+}
+
+/* MODAL / CART OVERLAY (CLEAN background - NO BLUR) */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background without blur */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.cart-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 button {

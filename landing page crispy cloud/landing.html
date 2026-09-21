@@ -1,59 +1,769 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crispy Cloud</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <title>Crispy Cloud ☁️ | Freeze-Dried Natural Fruit Snacks</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
-<body class="crispy">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff9ed',
+              100: '#fef1d6',
+              200: '#fce0ac',
+              300: '#fbc978',
+              400: '#f9a742',
+              500: '#f78318',
+              600: '#e8650c',
+              700: '#c04a0c',
+              800: '#993a12',
+              900: '#7b3113',
+            },
+            cloud: {
+              bg: '#FAF8F5',
+              card: '#FFFFFF',
+              accent: '#38BDF8',
+              pink: '#FF6B81',
+              purple: '#A855F7'
+            }
+          },
+          boxShadow: {
+            'soft': '0 10px 30px -10px rgba(247, 131, 24, 0.15)',
+            'card': '0 12px 35px rgba(0, 0, 0, 0.04)',
+            'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+          },
+          animation: {
+            'float': 'float 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 3s infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Crispy Cloud ☁️</h1>
-    <p>Natural freeze-dried fruits, healthy & tasty snacks</p>
-
-   
-  </section>
-  🛒 : <span id="cartCount">0</span>
-
-
-  <!-- PRODUCTS -->
-  <section class="products">
-
-    <h2>Our Products</h2>
-
-    <div class="card">
-      <img src="https://images.pexels.com/photos/4499212/pexels-photo-4499212.jpeg"alt="Mango">
-      <h3>Mango Slices</h3>
-      <p>$5.99</p>
-      <button onclick="addToCart('mango')">Add to Cart</button>
-    </div>
+  <style>
+    body {
+      background-color: #FAF8F5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #2D3748;
+    }
     
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
 
-    <div class="card">
-      <img src="https://media.istockphoto.com/id/939430546/photo/freeze-dried-strawberries-on-a-slate-counter.jpg?s=1024x1024&w=is&k=20&c=JDBqrkuAlf7ROOGA_8keBMOjxjpba4OIApxmFnCRZI4=" alt="strawberries">
-      <h3>Strawberry Chips</h3>
-      <p>$6.99</p>
-      <button onclick="addToCart('Strawberry Chips')">Add to Cart</button>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .gradient-hero {
+      background: radial-gradient(circle at 10% 20%, rgba(254, 241, 214, 0.8) 0%, rgba(250, 248, 245, 1) 90%);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #f78318 0%, #FF6B81 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF8F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #fcd34d;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="antialiased text-gray-800 overflow-x-hidden selection:bg-brand-200 selection:text-brand-900">
+
+  <!-- HEADER & NAVIGATION -->
+  <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 glass-nav border-b border-orange-100/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-400 to-amber-300 flex items-center justify-center text-xl shadow-md transform group-hover:rotate-12 transition-transform duration-300">
+          ☁️
+        </div>
+        <span class="font-heading font-extrabold text-2xl tracking-tight text-gray-900">
+          Crispy<span class="text-brand-500">Cloud</span>
+        </span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium text-gray-600">
+        <a href="#home" class="hover:text-brand-500 transition-colors">Home</a>
+        <a href="#products" class="hover:text-brand-500 transition-colors">Products</a>
+        <a href="#benefits" class="hover:text-brand-500 transition-colors">Benefits</a>
+        <a href="#reviews" class="hover:text-brand-500 transition-colors">Reviews</a>
+        <a href="#faq" class="hover:text-brand-500 transition-colors">FAQ</a>
+      </nav>
+
+      <!-- Cart Button & Mobile Menu Trigger -->
+      <div class="flex items-center gap-4">
+        <button id="cartToggleBtn" onclick="toggleCartDrawer()" class="relative bg-brand-500 hover:bg-brand-600 text-white font-semibold px-4 py-2.5 rounded-2xl shadow-soft hover:shadow-lg transition-all flex items-center gap-3 group active:scale-95">
+          <div class="relative">
+            <i class="fa-solid font-bold fa-basket-shopping text-lg group-hover:scale-110 transition-transform"></i>
+            <span id="cartBadge" class="absolute -top-2.5 -right-3 bg-cloud-pink text-white text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white scale-0 transition-transform">0</span>
+          </div>
+          <span class="hidden sm:inline text-sm font-bold">Cart</span>
+          <span id="cartTotalHeader" class="bg-brand-600/60 px-2 py-0.5 rounded-lg text-xs font-bold">$0.00</span>
+        </button>
+
+        <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 hover:text-brand-500 focus:outline-none p-2">
+          <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://images.pexels.com/photos/6823266/pexels-photo-6823266.jpeg" alt="apples" >
-      <h3>Apple Bites</h3>
-      <p>$4.99</p>
-      <button onclick="addToCart('Apple Bites')">Add to Cart</button>
+    <!-- Mobile Nav Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-lg border-b border-gray-100 px-4 pt-2 pb-6 space-y-3">
+      <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-brand-500">Home</a>
+      <a href="#products" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-brand-500">Products</a>
+      <a href="#benefits" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-brand-500">Benefits</a>
+      <a href="#reviews" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-brand-500">Reviews</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-brand-500">FAQ</a>
     </div>
+  </header>
 
-    <div class="card">
-      <img src="    https://images.pexels.com/photos/3471790/pexels-photo-3471790.jpeg" alt="orenges" >
-      <h3>orenges slices</h3>
-      <p>$2.99</p>
-      <button onclick="addToCart('orenges slices')">Add to Cart</button>
+  <!-- HERO SECTION -->
+  <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 gradient-hero relative overflow-hidden">
+    <!-- Ambient Blur Circles -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-amber-200/40 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-rose-200/30 rounded-full blur-3xl -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Content -->
+        <div class="space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100/80 border border-orange-200 text-brand-700 text-sm font-bold shadow-sm">
+            <span class="animate-pulse">✨</span> 100% Organic, Pure & Super Crunchy
+          </div>
+
+          <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-gray-900 leading-tight">
+            Taste Nature’s Crunch in Every <span class="text-gradient">Crispy Cloud</span>
+          </h1>
+
+          <p class="text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            Gently freeze-dried at peak ripeness to preserve 98% of natural nutrients, intense fruit flavor, and zero added sugars or preservatives. Healthy snacking redefined.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#products" class="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white font-bold px-8 py-4 rounded-2xl shadow-soft hover:shadow-xl hover:-translate-y-0.5 transition-all text-center">
+              Shop Snacks <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+            </a>
+            <a href="#benefits" class="w-full sm:w-auto bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 font-bold px-8 py-4 rounded-2xl shadow-sm hover:shadow transition-all text-center">
+              Why Freeze-Dried?
+            </a>
+          </div>
+
+          <!-- Quick Trust Indicators -->
+          <div class="pt-6 border-t border-orange-100 flex items-center justify-center lg:justify-start gap-6 text-xs sm:text-sm font-semibold text-gray-500">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-green-500"></i> No Sugar Added</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-green-500"></i> Non-GMO</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-green-500"></i> Vegan Friendly</span>
+          </div>
+        </div>
+
+        <!-- Right Visual Showcase -->
+        <div class="relative flex justify-center items-center">
+          <!-- Main Floating Card Display -->
+          <div class="relative w-full max-w-md lg:max-w-lg">
+            
+            <div class="relative z-10 bg-white p-4 sm:p-6 rounded-3xl shadow-card border border-orange-100 animate-float">
+              <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-gradient-to-br from-amber-50 to-orange-100">
+                <img src="https://images.pexels.com/photos/4499212/pexels-photo-4499212.jpeg" alt="Crispy Mango" class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-3 left-3 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">⭐ Best Seller</span>
+              </div>
+              <div class="mt-4 flex justify-between items-center">
+                <div>
+                  <h3 class="font-heading font-bold text-xl text-gray-900">Ripe Mango Crunch</h3>
+                  <p class="text-sm text-gray-500">100% Real Freeze-Dried Mangoes</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-2xl font-extrabold text-brand-600">$5.99</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Badge 1 -->
+            <div class="absolute -top-6 -left-6 z-20 glass-card p-3 rounded-2xl shadow-lg flex items-center gap-3 border border-white/60">
+              <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-500 flex items-center justify-center text-xl">🍓</div>
+              <div>
+                <p class="text-xs text-gray-500 font-semibold">100% Pure Fruit</p>
+                <p class="text-xs font-bold text-gray-800">Zero Additives</p>
+              </div>
+            </div>
+
+            <!-- Floating Badge 2 -->
+            <div class="absolute -bottom-6 -right-6 z-20 glass-card p-3 rounded-2xl shadow-lg flex items-center gap-3 border border-white/60">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">⚡</div>
+              <div>
+                <p class="text-xs text-gray-500 font-semibold">Crunchy Texture</p>
+                <p class="text-xs font-bold text-gray-800">Nutrient Packed</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
-  <script src="script.js"></script>
+
+  <!-- HIGHLIGHT FEATURES -->
+  <section id="benefits" class="py-16 bg-white border-y border-orange-100/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+        
+        <div class="p-6 rounded-2xl bg-cloud-bg border border-gray-100 text-center hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl">🌿</div>
+          <h4 class="font-heading font-bold text-gray-900 text-lg mb-1">100% Natural</h4>
+          <p class="text-xs text-gray-500">Pure fruit goodness without artificial colors or flavorings.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-cloud-bg border border-gray-100 text-center hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-rose-100 text-rose-500 flex items-center justify-center text-2xl">🚫</div>
+          <h4 class="font-heading font-bold text-gray-900 text-lg mb-1">No Added Sugar</h4>
+          <p class="text-xs text-gray-500">Naturally sweet flavor straight from ripe orchard harvests.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-cloud-bg border border-gray-100 text-center hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl">⏳</div>
+          <h4 class="font-heading font-bold text-gray-900 text-lg mb-1">Long Shelf Life</h4>
+          <p class="text-xs text-gray-500">Sealed freshness for convenient on-the-go snacking anytime.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-cloud-bg border border-gray-100 text-center hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl">💪</div>
+          <h4 class="font-heading font-bold text-gray-900 text-lg mb-1">Nutrients Retained</h4>
+          <p class="text-xs text-gray-500">Advanced freeze-drying locks in up to 98% of vitamins.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION -->
+  <section id="products" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <span class="text-brand-500 font-bold text-sm uppercase tracking-wider">Crispy Collection</span>
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-gray-900 mt-2">
+        Explore Our Fruit Crisps
+      </h2>
+      <p class="text-gray-600 mt-3">Hand-picked fruits freeze-dried to perfection for maximum crunch and natural sweetness.</p>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Injected via JavaScript dynamically -->
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="reviews" class="py-20 bg-amber-50/50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-brand-500 font-bold text-sm uppercase tracking-wider">Snacker Reviews</span>
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-gray-900 mt-2">Loved by Healthy Crunchers</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="bg-white p-8 rounded-3xl shadow-card border border-orange-100 flex flex-col justify-between">
+          <div>
+            <div class="flex text-amber-400 gap-1 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"The Strawberry Chips are addictive! They melt in your mouth then give that satisfying crispiness. Super easy snack for my toddler and me."</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-rose-200 text-rose-700 font-bold flex items-center justify-center">SL</div>
+            <div>
+              <h5 class="font-bold text-gray-900 text-sm">Sarah L.</h5>
+              <p class="text-xs text-gray-400">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl shadow-card border border-orange-100 flex flex-col justify-between">
+          <div>
+            <div class="flex text-amber-400 gap-1 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Finally a healthy snack for my office desk that doesn't mess up my diet. Mango slices taste just like fresh mangoes!"</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-amber-200 text-amber-700 font-bold flex items-center justify-center">DM</div>
+            <div>
+              <h5 class="font-bold text-gray-900 text-sm">David M.</h5>
+              <p class="text-xs text-gray-400">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl shadow-card border border-orange-100 flex flex-col justify-between">
+          <div>
+            <div class="flex text-amber-400 gap-1 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">"Great topping for morning yogurt bowls and smoothies. Crunchiness lasts super long inside the ziplock pouch!"</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-sky-200 text-sky-700 font-bold flex items-center justify-center">ER</div>
+            <div>
+              <h5 class="font-bold text-gray-900 text-sm">Emily R.</h5>
+              <p class="text-xs text-gray-400">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <span class="text-brand-500 font-bold text-sm uppercase tracking-wider">Got Questions?</span>
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-gray-900 mt-2">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="space-y-4">
+      
+      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <button onclick="toggleFaq(1)" class="w-full text-left p-6 font-bold text-gray-900 flex justify-between items-center hover:bg-gray-50">
+          <span>What is freeze-drying and how does it work?</span>
+          <i id="faq-icon-1" class="fa-solid fa-chevron-down text-brand-500 transition-transform"></i>
+        </button>
+        <div id="faq-ans-1" class="hidden px-6 pb-6 text-gray-600 text-sm leading-relaxed">
+          Freeze-drying sublimates moisture directly from frozen fruit under vacuum conditions. Because no heat is used, the fruit keeps almost all its natural nutrients, shape, vibrant color, and sweet flavor.
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <button onclick="toggleFaq(2)" class="w-full text-left p-6 font-bold text-gray-900 flex justify-between items-center hover:bg-gray-50">
+          <span>Are there any preservatives or added sugars?</span>
+          <i id="faq-icon-2" class="fa-solid fa-chevron-down text-brand-500 transition-transform"></i>
+        </button>
+        <div id="faq-ans-2" class="hidden px-6 pb-6 text-gray-600 text-sm leading-relaxed">
+          None at all! Our ingredients list has only one thing: 100% pure real fruit. No sulfur dioxide, no added sugars, no artificial flavors.
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <button onclick="toggleFaq(3)" class="w-full text-left p-6 font-bold text-gray-900 flex justify-between items-center hover:bg-gray-50">
+          <span>How long do Crispy Cloud snacks stay fresh?</span>
+          <i id="faq-icon-3" class="fa-solid fa-chevron-down text-brand-500 transition-transform"></i>
+        </button>
+        <div id="faq-ans-3" class="hidden px-6 pb-6 text-gray-600 text-sm leading-relaxed">
+          Unopened pouches stay fresh for up to 12 months. Once opened, seal the ziplock tightly and consume within 7 days for maximum crunchiness.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SLIDE-OUT CART SIDEBAR DRAWER -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+    <!-- Overlay backdrop -->
+    <div id="cartBackdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"></div>
+
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out pointer-events-auto" id="cartPanel">
+      
+      <!-- Drawer Header -->
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between bg-cloud-bg">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🛒</span>
+          <h3 class="font-heading font-extrabold text-xl text-gray-900">Your Snack Cart</h3>
+        </div>
+        <button onclick="toggleCartDrawer()" class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Cart Item List -->
+      <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <!-- Dynamic Cart Items -->
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="p-6 border-t border-gray-100 bg-cloud-bg space-y-4">
+        <div class="space-y-1.5 text-sm">
+          <div class="flex justify-between text-gray-600">
+            <span>Subtotal</span>
+            <span id="cartSubtotal" class="font-semibold">$0.00</span>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <span>Estimated Tax (8%)</span>
+            <span id="cartTax" class="font-semibold">$0.00</span>
+          </div>
+          <div class="flex justify-between text-lg font-bold text-gray-900 pt-2 border-t border-gray-200">
+            <span>Total</span>
+            <span id="cartGrandTotal" class="text-brand-600">$0.00</span>
+          </div>
+        </div>
+
+        <button onclick="triggerCheckout()" id="checkoutBtn" disabled class="w-full bg-brand-500 hover:bg-brand-600 disabled:bg-gray-300 text-white font-bold py-3.5 rounded-2xl shadow-soft transition-all text-center">
+          Proceed to Checkout
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CHECKOUT SUCCESS MODAL -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl transform scale-95 transition-transform">
+      <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-heading font-extrabold text-2xl text-gray-900 mb-2">Order Confirmed!</h3>
+      <p class="text-sm text-gray-600 mb-6">Thank you for choosing Crispy Cloud! Your healthy crunchy treats are on their way.</p>
+      <button onclick="closeCheckoutModal()" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 rounded-2xl transition-colors">
+        Back to Shopping
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white pt-16 pb-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
+        
+        <div class="space-y-4">
+          <a href="#" class="flex items-center gap-2">
+            <span class="text-2xl">☁️</span>
+            <span class="font-heading font-extrabold text-2xl text-white">Crispy<span class="text-brand-400">Cloud</span></span>
+          </a>
+          <p class="text-sm text-gray-400 leading-relaxed">Delicious 100% freeze-dried real fruit snacks packed with natural nutrients for healthy lifestyles.</p>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#home" class="hover:text-brand-400 transition-colors">Home</a></li>
+            <li><a href="#products" class="hover:text-brand-400 transition-colors">Products</a></li>
+            <li><a href="#benefits" class="hover:text-brand-400 transition-colors">Benefits</a></li>
+            <li><a href="#reviews" class="hover:text-brand-400 transition-colors">Reviews</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Contact & Support</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><i class="fa-solid fa-envelope mr-2 text-brand-400"></i> hello@crispycloud.com</li>
+            <li><i class="fa-solid fa-phone mr-2 text-brand-400"></i> +1 (800) 555-SNACK</li>
+            <li><i class="fa-solid fa-location-dot mr-2 text-brand-400"></i> Sunnyvale, CA</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white mb-4">Stay Crunchy</h4>
+          <p class="text-xs text-gray-400 mb-3">Subscribe for 15% off your first snack order!</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="Your email address" class="bg-gray-800 text-sm text-white px-3 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-400 w-full">
+            <button class="bg-brand-500 hover:bg-brand-600 px-4 py-2 rounded-xl text-sm font-bold transition-colors">Join</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+        <p>© 2026 Crispy Cloud Snacks Inc. All rights reserved.</p>
+        <div class="flex space-x-4 mt-4 sm:mt-0">
+          <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-instagram text-lg"></i></a>
+          <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-facebook text-lg"></i></a>
+          <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-tiktok text-lg"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Product Data Array
+    const products = [
+      {
+        id: 'mango',
+        name: 'Mango Slices',
+        price: 5.99,
+        rating: 4.9,
+        reviews: 128,
+        image: 'https://images.pexels.com/photos/4499212/pexels-photo-4499212.jpeg',
+        tag: 'Best Seller',
+        desc: 'Sweet & tropical sun-ripened mango crisps.'
+      },
+      {
+        id: 'strawberry',
+        name: 'Strawberry Chips',
+        price: 6.99,
+        rating: 5.0,
+        reviews: 210,
+        image: 'https://media.istockphoto.com/id/939430546/photo/freeze-dried-strawberries-on-a-slate-counter.jpg?s=1024x1024&w=is&k=20&c=JDBqrkuAlf7ROOGA_8keBMOjxjpba4OIApxmFnCRZI=',
+        tag: 'Fan Favorite',
+        desc: 'Tangy and crunchy freeze-dried strawberry slices.'
+      },
+      {
+        id: 'apple',
+        name: 'Apple Bites',
+        price: 4.99,
+        rating: 4.8,
+        reviews: 95,
+        image: 'https://images.pexels.com/photos/6823266/pexels-photo-6823266.jpeg',
+        tag: 'Classic',
+        desc: 'Crispy honeycrisp apple bites with natural sweetness.'
+      },
+      {
+        id: 'orange',
+        name: 'Orange Slices',
+        price: 2.99,
+        rating: 4.7,
+        reviews: 64,
+        image: 'https://images.pexels.com/photos/3471790/pexels-photo-3471790.jpeg',
+        tag: 'Vitamin C Boost',
+        desc: 'Zesty and refreshing citrus slices full of crunch.'
+      },
+      {
+        id: 'dragonfruit',
+        name: 'Dragon Fruit Crisps',
+        price: 7.49,
+        rating: 4.9,
+        reviews: 82,
+        image: 'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg',
+        tag: 'Exotic',
+        desc: 'Vibrant pink dragon fruit slices with a light crunch.'
+      },
+      {
+        id: 'banana',
+        name: 'Banana Crunch',
+        price: 4.49,
+        rating: 4.8,
+        reviews: 112,
+        image: 'https://images.pexels.com/photos/1093837/pexels-photo-1093837.jpeg',
+        tag: 'Energy Pack',
+        desc: 'Creamy banana slices freeze-dried into crispy chips.'
+      }
+    ];
+
+    // State
+    let cart = [];
+
+    // Render Product Cards
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = products.map(product => `
+        <div class="bg-white rounded-3xl p-5 shadow-card border border-orange-100 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group">
+          <div>
+            <!-- Image Wrapper -->
+            <div class="relative h-52 rounded-2xl overflow-hidden bg-gray-50 mb-4">
+              <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-500">
+              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-brand-700 font-bold text-xs px-3 py-1 rounded-full shadow-sm">
+                ${product.tag}
+              </span>
+            </div>
+
+            <!-- Header & Rating -->
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-heading font-extrabold text-xl text-gray-900">${product.name}</h3>
+              <div class="flex items-center text-amber-400 text-xs font-bold gap-1 bg-amber-50 px-2 py-1 rounded-lg">
+                <i class="fa-solid fa-star"></i> ${product.rating}
+              </div>
+            </div>
+
+            <p class="text-xs text-gray-500 mb-4">${product.desc}</p>
+          </div>
+
+          <!-- Price & Action -->
+          <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-2">
+            <span class="font-heading text-2xl font-extrabold text-brand-600">$${product.price.toFixed(2)}</span>
+            <button onclick="addToCart('${product.id}')" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-soft hover:shadow duration-200 flex items-center gap-2 active:scale-95 text-sm">
+              <i class="fa-solid fa-plus text-xs"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Cart Operations
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const existing = cart.find(item => item.id === productId);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      updateCartUI();
+      openCartDrawer();
+    }
+
+    function updateQuantity(productId, delta) {
+      const item = cart.find(p => p.id === productId);
+      if (!item) return;
+
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(p => p.id !== productId);
+      }
+
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      // Header Total
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const tax = subtotal * 0.08;
+      const grandTotal = subtotal + tax;
+
+      // Update Badges
+      const badge = document.getElementById('cartBadge');
+      badge.innerText = totalCount;
+      if (totalCount > 0) {
+        badge.classList.remove('scale-0');
+        badge.classList.add('scale-100');
+      } else {
+        badge.classList.remove('scale-100');
+        badge.classList.add('scale-0');
+      }
+
+      document.getElementById('cartTotalHeader').innerText = `$${subtotal.toFixed(2)}`;
+
+      // Render Drawer Items
+      const container = document.getElementById('cartItemsContainer');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-gray-400">
+            <div class="text-4xl mb-3">🧺</div>
+            <p class="font-medium">Your cart is empty.</p>
+            <p class="text-xs text-gray-400 mt-1">Add some delicious fruit snacks to get started!</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="flex items-center gap-4 bg-white p-3 rounded-2xl border border-gray-100 shadow-sm">
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl">
+            <div class="flex-1">
+              <h4 class="font-bold text-gray-900 text-sm">${item.name}</h4>
+              <p class="text-xs text-brand-600 font-extrabold">$${(item.price * item.qty).toFixed(2)}</p>
+            </div>
+            <div class="flex items-center gap-2 bg-gray-100 px-2 py-1 rounded-xl">
+              <button onclick="updateQuantity('${item.id}', -1)" class="w-6 h-6 rounded-lg bg-white text-gray-700 hover:bg-gray-200 font-bold text-xs flex items-center justify-center">-</button>
+              <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+              <button onclick="updateQuantity('${item.id}', 1)" class="w-6 h-6 rounded-lg bg-white text-gray-700 hover:bg-gray-200 font-bold text-xs flex items-center justify-center">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Totals
+      document.getElementById('cartSubtotal').innerText = `$${subtotal.toFixed(2)}`;
+      document.getElementById('cartTax').innerText = `$${tax.toFixed(2)}`;
+      document.getElementById('cartGrandTotal').innerText = `$${grandTotal.toFixed(2)}`;
+
+      // Checkout Button status
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      checkoutBtn.disabled = cart.length === 0;
+    }
+
+    // Drawer Visibility
+    function toggleCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const panel = document.getElementById('cartPanel');
+
+      if (drawer.classList.contains('opacity-0')) {
+        openCartDrawer();
+      } else {
+        closeCartDrawer();
+      }
+    }
+
+    function openCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const panel = document.getElementById('cartPanel');
+      drawer.classList.remove('pointer-events-none', 'opacity-0');
+      drawer.classList.add('opacity-100');
+      panel.classList.remove('translate-x-full');
+    }
+
+    function closeCartDrawer() {
+      const drawer = document.getElementById('cartDrawer');
+      const panel = document.getElementById('cartPanel');
+      drawer.classList.add('opacity-0');
+      panel.classList.add('translate-x-full');
+      setTimeout(() => {
+        drawer.classList.add('pointer-events-none');
+      }, 300);
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function toggleFaq(num) {
+      const ans = document.getElementById(`faq-ans-${num}`);
+      const icon = document.getElementById(`faq-icon-${num}`);
+      
+      ans.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function triggerCheckout() {
+      if (cart.length === 0) return;
+      closeCartDrawer();
+      const modal = document.getElementById('checkoutModal');
+      modal.classList.remove('hidden');
+      cart = [];
+      updateCartUI();
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById('checkoutModal');
+      modal.classList.add('hidden');
+    }
+
+    // On Load Initialization
+    window.onload = function() {
+      renderProducts();
+      updateCartUI();
+    };
+  </script>
+
 </body>
 </html>
