@@ -247,7 +247,9 @@ nav a:hover {
 
 .card-tags {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 
